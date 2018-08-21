@@ -12,7 +12,7 @@ import com.torres.toni.jokedisplaylibrary.JokeDisplayActivity;
 import com.torres.toni.jokelibrary.JokeProvider;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.JokeCallback{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +44,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String joke = JokeProvider.getRandomJoke();
-        //Toast.makeText(this, joke, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, JokeDisplayActivity.class);
-        intent.putExtra(getString(R.string.joke_extra), joke);
-        startActivity(intent);
+        EndpointsAsyncTask endpointsAsyncTask = new EndpointsAsyncTask(this);
+        endpointsAsyncTask.execute();
     }
 
 
+    @Override
+    public void onFinished(String result) {
+        Intent intent = new Intent(this, JokeDisplayActivity.class);
+        intent.putExtra(getString(R.string.joke_extra), result);
+        startActivity(intent);
+    }
 }
