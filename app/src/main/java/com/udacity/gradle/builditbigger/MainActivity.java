@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.torres.toni.jokedisplaylibrary.JokeDisplayActivity;
 
@@ -49,8 +50,12 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     @Override
     public void onFinished(String result) {
-        Intent intent = new Intent(this, JokeDisplayActivity.class);
-        intent.putExtra(getString(R.string.joke_extra), result);
-        startActivity(intent);
+        if (result == null || result.isEmpty()) {
+            Toast.makeText(this, R.string.joke_loading_error, Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, JokeDisplayActivity.class);
+            intent.putExtra(getString(R.string.joke_extra), result);
+            startActivity(intent);
+        }
     }
 }
