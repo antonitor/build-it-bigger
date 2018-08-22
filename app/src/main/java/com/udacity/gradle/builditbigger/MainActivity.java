@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.torres.toni.jokedisplaylibrary.JokeDisplayActivity;
-import com.torres.toni.jokelibrary.JokeProvider;
 
 
 public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.JokeCallback{
